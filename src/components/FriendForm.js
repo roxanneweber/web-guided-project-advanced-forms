@@ -17,6 +17,7 @@ export default function FriendForm(props) {
   const onChange = evt => {
     /* 🔥 FIX THIS SO IT ALSO WORKS WITH CHECKBOXES */
     const { name, value, checked, type } = evt.target;
+    console.log(evt.target.type);
     const valueToUse = type === 'checkbox' ? checked : value;
     change(name, valueToUse);
   }
@@ -139,3 +140,12 @@ export default function FriendForm(props) {
     </form>
   )
 }
+
+// hobbies.map(hobby => {
+//   <input
+//     type="checkbox"
+//     name={hobby}
+//     onChange={onChange}
+//     checked={values[hobby]}
+//   />
+// })
