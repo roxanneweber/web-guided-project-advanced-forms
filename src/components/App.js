@@ -64,7 +64,7 @@ export default function App() {
     //    and regardless of success or failure, the form should reset
     axios.post('http://buddies.com/api/friends', newFriend)
       .then(res => {
-        setFriends([res.data, ...friends]);
+        setFriends([res.data, ]);
       }).catch(err => {
         console.error(err);
       }).finally(() => {
@@ -90,7 +90,13 @@ export default function App() {
       role: formValues.role.trim(),
       civil: formValues.civil.trim(),
       // 🔥 STEP 7- WHAT ABOUT HOBBIES?
+      hobbies: ['hiking', 'reading', 'coding'].filter(hobby => !!formValues[hobby])
     }
+    // !!"Casey" => !false => true
+    // !!false => !true => false
+    // !!null => !true => false
+    console.log(newFriend);
+    postNewFriend(newFriend);
     // 🔥 STEP 8- POST NEW FRIEND USING HELPER
   }
 
@@ -103,7 +109,8 @@ export default function App() {
 
   useEffect(() => {
     // 🔥 STEP 9- ADJUST THE STATUS OF `disabled` EVERY TIME `formValues` CHANGES
-  }, [])
+    schema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
 
   return (
     <div className='container'>
