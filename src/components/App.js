@@ -64,7 +64,7 @@ export default function App() {
     //    and regardless of success or failure, the form should reset
     axios.post('http://buddies.com/api/friends', newFriend)
       .then(res => {
-        setFriends([res.data, ]);
+        setFriends([res.data, ...friends]);
       }).catch(err => {
         console.error(err);
       }).finally(() => {
